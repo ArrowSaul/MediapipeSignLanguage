@@ -1,9 +1,15 @@
+# 导入cv2库，用于视频捕获和图像处理
 import cv2
+# 导入mediapipe库，用于人体关键点的检测
 import mediapipe as mp
+# 导入numpy库，用于数值计算和数组操作
 import numpy as np
+# 从tools模块中的landmark_handle模块导入landmark_handle函数，用于处理关键点数据
 from tools.landmark_handle import landmark_handle
 
+# 定义视频编号，用于指定要处理的视频源
 video_num = 1
+
 # 三个人的效果没有一个人的好，还在想办法
 # also - 也
 # attractive - 有吸引力的
@@ -42,13 +48,11 @@ video_num = 1
 
 # 想 - think
 # 为什么 - why
-# 出生 - born
 # 这里 - here
 # 家 - home
 # 甚至 - even
 # 父母 - parents
 # 看 - look
-# 羡慕 - envy
 # 生活 - life
 # 安全 - safety
 # 和 - and
@@ -73,10 +77,13 @@ video_num = 1
 # 撒谎 - lie
 # 糟糕 - terrible
 # 惩罚 - punish
-# label = ["think", "why", "born", "here", "home", "even", "parents", "look", "envy", "life", "safety", "and", "same",
-#          "hope", "love", "accept", "tell", "give up", "continue", "achieve", "know", "difficult", "preach", "identity",
-#          "cautiously", "alive", "vigilant", "hide", "fair", "wrong", "lie", "terrible", "punish"]
-label = ["think", "here", "home", "look"]
+label = ["think", "why", "here", "home", "even", "look", "life", "and", "same",
+         "hope", "love",
+         "accept", "tell",
+         "give_up", "continue", "achieve",
+         "vigilant", "lie"]
+# label = ["born", "think", "here", "home", "look", "love", "lie", "why", "even"]
+# label = ["why", "love", "think"]
 label_num = len(label)
 print("label_num:" + str(label_num))
 # 模型保存地址即是label+.npz
@@ -95,7 +102,8 @@ for i in range(len(label)):
     data = []
     for j in range(video_num):
         # cap = cv2.VideoCapture("./Video/static/" + label[i] + "_" + str(j) + ".mp4")
-        cap = cv2.VideoCapture("./Video/static/" + label[i] + "_" + "1" + ".mp4")
+        # cap = cv2.VideoCapture("./Video/static/" + label[i] + "_" + "1" + ".mp4")
+        cap = cv2.VideoCapture("./Video/static/" + label[i] + "_" + "0" + ".mp4")
         ret, frame = cap.read()
         while ret is True:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
